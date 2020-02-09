@@ -10,14 +10,7 @@ while True:
     external_temp = mega.get_external_temp()
     external_pressure = mega.get_external_pressure()
     beer_ph = mega.get_beer_ph()
+    solenoid_releases = mega.get_sol_releases()
 
-
-
-
-
-    command = 'st2'.encode()
-    self.ser.write(command)
-    time.sleep(8)
-    print(ser.readline().decode())
 
 
