@@ -2,7 +2,7 @@ import serial
 import time
 
 
-ser = serial.Serial('/dev/ttyACM0', 115200)
+ser = serial.Serial('/dev/ttyAMA0', 115200)
 command = 'c'.encode()
 ser.write(command)
 while not ser.in_waiting:  # Or: while self.ser.inWaiting():
