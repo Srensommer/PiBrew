@@ -1,7 +1,7 @@
 import serial
 
 
-class GetValues(object):
+class GetValues:
     ser = serial.Serial('/dev/serial0', 115200, timeout=4)
 
     def clear_serial_read(self):

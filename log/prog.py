@@ -1,9 +1,9 @@
 import time
 import sys
-from . import getValues
+from log.getValues import GetValues
 import requests
 
-mega = getValues.GetValues()
+mega = GetValues()
 mega.clear_serial_read()
 
 while True:
