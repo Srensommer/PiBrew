@@ -2,7 +2,9 @@ import serial
 
 
 class GetValues:
-    ser = serial.Serial('/dev/serial0', 115200, timeout=4)
+
+    def __init__(self):
+        self.ser = serial.Serial('/dev/serial0', 115200, timeout=4)
 
     def clear_serial_read(self):
         while self.ser.in_waiting:  # Or: while self.ser.inWaiting():

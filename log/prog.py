@@ -1,6 +1,6 @@
 import time
 import sys
-from log.getValues import GetValues
+from getValues import GetValues
 import requests
 
 mega = GetValues()
@@ -16,5 +16,6 @@ while True:
     x = requests.post(url, data=my_data)
 
     print(x.text)
+    time.sleep(60*10)
 
 
