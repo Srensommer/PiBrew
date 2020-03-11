@@ -4,21 +4,22 @@ post_to_server = False
 import time
 import sys
 if not debug:
-    from getValues import GetValues
+    from megaApi import MegaApi
 from dose_fertilizer import TimeChecker
 import requests
 from threading import Timer
 import datetime
 
+
+dose_time = datetime.time(hour=13, minute=0, second=0)
+
 if not debug:
-    mega = GetValues()
+    mega = MegaApi()
     mega.clear_serial_read()
+    time_checker = TimeChecker.dosing_version(dose_time, mega)
+else:
+    time_checker = TimeChecker(dose_time)
 
-time_checker = TimeChecker()
-
-
-dose_time = datetime.time(hour=21, minute=9, second=0)
-time_checker.init(dose_time)
 
 while True:
     temp = 29

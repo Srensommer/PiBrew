@@ -1,15 +1,22 @@
 from datetime import datetime, timedelta
 from threading import Timer
+import megaApi
 
 
 class TimeChecker:
+    mega: megaApi.MegaApi
     time = datetime.today()
     # 15 min delay
     timer_max_delay = 60*15
     
-    def init(self, time):
+    def __init__(self, time):
         self.time = time
         self.fertilize_time_controller()
+
+    @classmethod
+    def dosing_version(cls, time, mega):
+        cls.time = time
+        cls.mega = mega
 
     def fertilize_time_controller(self):
         now = datetime.today()
@@ -38,5 +45,7 @@ class TimeChecker:
 
     def fertilize(self):
         print("Fertilize")
+        if self.mega:
+            self.mega.relay_timed(1, 3)
         t = Timer(self.timer_max_delay, self.fertilize_time_controller)
         t.start()

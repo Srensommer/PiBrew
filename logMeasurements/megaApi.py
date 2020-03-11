@@ -1,7 +1,7 @@
 import serial
 
 
-class GetValues:
+class MegaApi:
 
     def __init__(self):
         self.ser = serial.Serial('/dev/serial0', 115200, timeout=4)
