@@ -77,7 +77,7 @@ class MegaApi:
         return self.ser.readline().decode()
 
     def relay_timed(self, relay_number, time):
-        command = 'rt' + relay_number + time
+        command = 'rt' + str(relay_number) + str(time)
         self.ser.write(command.encode())
         return self.ser.readline().decode()
 
