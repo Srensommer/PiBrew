@@ -6,8 +6,8 @@ import megaApi
 class TimeChecker:
     mega: megaApi.MegaApi
     time = datetime.today()
-    # 15 min delay
-    timer_max_delay = 60*15
+    # 5 min delay
+    timer_max_delay = 60*5
     
     def __init__(self, time):
         self.time = time
