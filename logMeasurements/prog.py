@@ -32,7 +32,7 @@ while True:
     if not debug:
         temp = mega.get_water_temp()
         #  ph = mega.get_ph()
-        tds = mega.get_tds(temp)
+        #tds = mega.get_tds(temp)
         print(temp)
     url = 'https://hansenbrew.dk/aquarium/postautolog/'
     my_data = {"temp": temp, "ph": ph, "TDS": tds}
