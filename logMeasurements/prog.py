@@ -9,11 +9,10 @@ from dose_fertilizer import TimeChecker
 import requests
 from requests.exceptions import Timeout
 from threading import Timer
-import datetime
-import time
+from datetime import datetime, timedelta, time
 
 
-dose_time = datetime.time(hour=13, minute=00, second=0)
+dose_time = time(hour=13, minute=00, second=0)
 
 if not debug:
     mega = MegaApi()
@@ -24,7 +23,25 @@ else:
     time_checker = TimeChecker(dose_time)
 
 
-while True:
+def measure_timer():
+    now = datetime.today()
+    next_measure_time = now + timedelta(
+        minutes=10 - now.minute % 10,
+        seconds=10 - now.second % 10,
+        microseconds=0
+    )
+
+    secs = (next_measure_time - now).total_seconds()
+    print("Next measure in:  " + str(secs) + " seconds")
+
+    t = Timer(secs, measure)
+    t.start()
+
+
+measure_timer()
+
+
+def measure():
     temp = 29
     ph = 8
     tds = 444
@@ -32,7 +49,7 @@ while True:
     if not debug:
         temp = mega.get_water_temp()
         #  ph = mega.get_ph()
-        #tds = mega.get_tds(temp)
+        tds = mega.get_tds(temp)
         print(temp)
     url = 'https://hansenbrew.dk/aquarium/postautolog/'
     my_data = {"temp": temp, "ph": ph, "TDS": tds}
@@ -49,4 +66,5 @@ while True:
                     pass #log to file
             except Timeout:
                 print("try to post again")
-    time.sleep(60*10)
+
+    measure_timer()
