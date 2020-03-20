@@ -69,6 +69,6 @@ class Program:
         t.start()
 
 
-something = Program
+something = Program()
 while True:
     delay.sleep(60*60*24)
