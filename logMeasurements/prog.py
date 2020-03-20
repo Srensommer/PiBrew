@@ -23,24 +23,6 @@ else:
     time_checker = TimeChecker(dose_time)
 
 
-def measure_timer():
-    now = datetime.today()
-    next_measure_time = now + timedelta(
-        minutes=10 - now.minute % 10,
-        seconds=10 - now.second % 10,
-        microseconds=0
-    )
-
-    secs = (next_measure_time - now).total_seconds()
-    print("Next measure in:  " + str(secs) + " seconds")
-
-    t = Timer(secs, measure)
-    t.start()
-
-
-measure_timer()
-
-
 def measure():
     temp = 29
     ph = 8
@@ -68,3 +50,25 @@ def measure():
                 print("try to post again")
 
     measure_timer()
+
+
+measure()
+
+
+def measure_timer():
+    now = datetime.today()
+    next_measure_time = now + timedelta(
+        minutes=10 - now.minute % 10,
+        seconds=10 - now.second % 10,
+        microseconds=0
+    )
+
+    secs = (next_measure_time - now).total_seconds()
+    print("Next measure in:  " + str(secs) + " seconds")
+
+    t = Timer(secs, measure)
+    t.start()
+
+
+
+
