@@ -4,7 +4,7 @@ import serial
 class MegaApi:
 
     def __init__(self):
-        self.ser = serial.Serial('/dev/serial0', 115200, timeout=4)
+        self.ser = serial.Serial('/dev/serial0', 115200, timeout=8)
 
     def clear_serial_read(self):
         print("Flush")

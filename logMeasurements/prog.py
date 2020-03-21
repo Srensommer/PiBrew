@@ -35,7 +35,8 @@ class Program:
             temp = self.mega.get_water_temp()
             #  ph = mega.get_ph()
             tds = self.mega.get_tds(temp)
-            print(temp)
+            print("temp: " + str(temp))
+            print("tds: " + str(tds))
         url = 'https://hansenbrew.dk/aquarium/postautolog/'
         my_data = {"temp": temp, "ph": ph, "TDS": tds}
 
