@@ -26,17 +26,8 @@ class Program:
         print("Init")
         self.measure()
 
-    def measure(self):
-        temp = 29
-        ph = 8
-        tds = 444
 
-        if not debug:
-            temp = self.mega.get_water_temp()
-            #  ph = mega.get_ph()
-            tds = self.mega.get_tds(temp)
-            print("temp: " + str(temp))
-            print("tds: " + str(tds))
+    def post_log_to_Server(self, temp, ph, tds):
         url = 'https://hansenbrew.dk/aquarium/postautolog/'
         my_data = {"temp": temp, "ph": ph, "TDS": tds}
 
@@ -47,13 +38,32 @@ class Program:
                 try:
                     x = requests.post(url, data=my_data, timeout=10)
                     print("responsecode: " + str(x.status_code))
+                    posted = True
                     if 200 <= x.status_code < 300:
-                        posted = True
-                        pass #log to file
-                except Timeout:
-                    print("try to post again")
+                        return True
+                    return False
 
+                except Timeout:
+                    print("Post to server - timeout")
+        return True
+
+
+    def measure(self):
+        temp = 29
+        ph = 8
+        tds = 444
+
+        posted = False
+        while not posted:
+            if not debug:
+                temp = self.mega.get_water_temp()
+                #  ph = mega.get_ph()
+                tds = self.mega.get_tds(temp)
+                print("temp: " + str(temp))
+                print("tds: " + str(tds))
+            posted = self.post_log_to_Server(temp, ph, tds)
         self.measure_timer()
+
 
     def measure_timer(self):
         now = datetime.today()
