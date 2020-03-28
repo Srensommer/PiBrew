@@ -26,7 +26,6 @@ class Program:
         print("Init")
         self.measure()
 
-
     def post_log_to_Server(self, temp, ph, tds):
         url = 'https://hansenbrew.dk/aquarium/postautolog/'
         my_data = {"temp": temp, "ph": ph, "TDS": tds}
@@ -47,23 +46,21 @@ class Program:
                     print("Post to server - timeout")
         return True
 
-
     def measure(self):
-        temp = 29
-        ph = 8
-        tds = 444
+        temp = 30
+        ph = 0
+        tds = 0
 
         posted = False
         while not posted:
             if not debug:
                 temp = self.mega.get_water_temp()
-                #  ph = mega.get_ph()
-                tds = self.mega.get_tds(temp)
+                ph = self.mega.get_ph()
+                tds = self.mega.get_tds()
                 print("temp: " + str(temp))
                 print("tds: " + str(tds))
             posted = self.post_log_to_Server(temp, ph, tds)
         self.measure_timer()
-
 
     def measure_timer(self):
         now = datetime.today()

@@ -101,9 +101,9 @@ class MegaApi:
         self.ser.write(command)
         return self.ser.readline().decode()
 
-    def get_tds(self, temp):
+    def get_tds(self):
         self.clear_serial_read()
-        command = 't' + str(temp)
+        command = 't'
         self.ser.write(command.encode())
         return self.ser.readline().decode()
 
