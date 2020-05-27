@@ -5,7 +5,7 @@ from threading import Timer
 from datetime import datetime, timedelta, time
 import time as delay
 
-debug = True
+debug = False
 
 if not debug:
     from megaApi import MegaApi
