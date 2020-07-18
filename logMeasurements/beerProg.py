@@ -43,7 +43,9 @@ class Program:
                     "external_pressure": self.mega.get_external_pressure(),
                     "air_releases_since_last_log": self.mega.get_sol_releases()
                 }
+                time_stamp_print(str(data))
             self.mega.sol_clear_releases()
+            self.mega.set_pressure_delta(20)
             posted = ApiCalls('brewbotics/upload/new/measurement/').post_log_to_server(data)
         self.measure_timer()
 

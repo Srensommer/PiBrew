@@ -16,11 +16,12 @@ class ApiCalls:
             while not posted:
                 try:
                     x = requests.post(self.host + self.url, data=data, timeout=10)
+                    print(str(x.status_code))
                     posted = True
                     if 200 <= x.status_code < 300:
                         return True
                     return False
-
+                    
                 except requests.exceptions.Timeout:
                     time_stamp_print("Post to server - timeout")
                 except requests.exceptions.RequestException as e:

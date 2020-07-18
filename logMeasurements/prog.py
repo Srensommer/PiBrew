@@ -33,6 +33,7 @@ class Program:
         while not posted:
             if not debug:
                 data = {"temp": self.mega.get_water_temp(), "ph": self.mega.get_ph(), "TDS": self.mega.get_tds()}
+                time_stamp_print(str(data))
             posted = ApiCalls('aquarium/postautolog/').post_log_to_server(data)
         self.measure_timer()
 
