@@ -25,5 +25,5 @@ class ApiCalls:
                 except requests.exceptions.Timeout:
                     timestamp_print("Post to server - timeout")
                 except requests.exceptions.RequestException as e:
-                    timestamp_print("Post to server - ConnectionError", e)
+                    timestamp_print("Post to server - ConnectionError" + e)
         return True
