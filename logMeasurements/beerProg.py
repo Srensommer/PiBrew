@@ -43,10 +43,10 @@ class Program:
                     "air_releases_since_last_log": self.mega.get_sol_releases()
                 }
                 time_stamp_print(str(data))
-            if not debug: 
-                self.mega.sol_clear_releases()
-                self.mega.set_pressure_delta(20)
             posted = ApiCalls('brewbotics/upload/new/measurement/').post_log_to_server(data)
+            if not debug and posted:
+                self.mega.sol_clear_releases()
+                self.mega.set_pressure_delta(40)
         self.measure_timer()
 
     def measure_timer(self):
