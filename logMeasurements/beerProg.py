@@ -1,14 +1,13 @@
-from dose_fertilizer import TimeChecker
-from util import time_stamp_print
-from apiCalls import ApiCalls
+from shared.util.util import timestamp_print
+from shared.apiCalls import ApiCalls
 from threading import Timer
-from datetime import datetime, timedelta, time
+from datetime import datetime, timedelta
 import time as delay
 
 debug = False
 
 if not debug:
-    from megaApi import MegaApi
+    from shared.megaApi import MegaApi
 
 
 class Program:
@@ -17,7 +16,7 @@ class Program:
         mega.clear_serial_read()
 
     def __init__(self):
-        time_stamp_print("Init")
+        timestamp_print("Init")
         self.measure()
 
     def measure(self):
@@ -55,7 +54,7 @@ class Program:
         next_measure_time = now + timedelta(minutes=10 - (now.minute % 10)) - timedelta(seconds=now.second)
 
         secs = (next_measure_time - now).total_seconds()
-        time_stamp_print("Next measure in:  " + str(int(secs / 60)) + "min and " + str(secs % 60) + "secs")
+        timestamp_print("Next measure in:  " + str(int(secs / 60)) + "min and " + str(secs % 60) + "secs")
 
         t = Timer(secs, self.measure)
         t.start()

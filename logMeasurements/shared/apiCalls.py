@@ -1,4 +1,4 @@
-from util import time_stamp_print
+from shared.util.util import timestamp_print
 import requests
 
 post_to_server = True
@@ -23,7 +23,7 @@ class ApiCalls:
                     return False
                     
                 except requests.exceptions.Timeout:
-                    time_stamp_print("Post to server - timeout")
+                    timestamp_print("Post to server - timeout")
                 except requests.exceptions.RequestException as e:
-                    time_stamp_print("Post to server - ConnectionError", e)
+                    timestamp_print("Post to server - ConnectionError", e)
         return True

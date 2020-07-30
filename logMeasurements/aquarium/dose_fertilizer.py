@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from threading import Timer
-import megaApi
+from shared import megaApi
 
 
 class TimeChecker:
