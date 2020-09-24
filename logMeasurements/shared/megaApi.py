@@ -4,7 +4,7 @@ import serial
 class MegaApi:
 
     def __init__(self):
-        self.ser = serial.Serial('/dev/serial0', 115200, timeout=8)
+        self.ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=8)
 
     def clear_serial_read(self):
         print("Flush")
@@ -77,6 +77,12 @@ class MegaApi:
         self.ser.write(command)
         return self.ser.readline().decode()
 
+    def set_pressure_delta(self, delta):
+        self.clear_serial_read()
+        command = 'ad' + str(delta)
+        self.ser.write(command.encode())
+        return self.ser.readline().decode()
+    
     def relay_open(self, relay_number):
         self.clear_serial_read()
         command = 'ro' + str(relay_number)

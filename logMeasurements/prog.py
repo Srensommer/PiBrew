@@ -1,6 +1,6 @@
-from dose_fertilizer import TimeChecker
-from util import time_stamp_print
-from apiCalls import ApiCalls
+from aquarium.dose_fertilizer import TimeChecker
+from shared.util.util import time_stamp_print
+from shared.apiCalls import ApiCalls
 from threading import Timer
 from datetime import datetime, timedelta, time
 import time as delay
@@ -8,7 +8,7 @@ import time as delay
 debug = False
 
 if not debug:
-    from megaApi import MegaApi
+    from shared.megaApi import MegaApi
 
 
 class Program:
@@ -33,6 +33,7 @@ class Program:
         while not posted:
             if not debug:
                 data = {"temp": self.mega.get_water_temp(), "ph": self.mega.get_ph(), "TDS": self.mega.get_tds()}
+                time_stamp_print(str(data))
             posted = ApiCalls('aquarium/postautolog/').post_log_to_server(data)
         self.measure_timer()
 
