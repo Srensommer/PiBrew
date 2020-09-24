@@ -1,13 +1,14 @@
 import serial
-
+from shared.util.util import timestamp_print
 
 class MegaApi:
 
     def __init__(self):
-        self.ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=8)
-
+        #self.ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=10)
+        self.ser = serial.Serial('/dev/serial0', 115200, timeout=10)
+    
     def clear_serial_read(self):
-        print("Flush")
+        timestamp_print("Flush")
         self.ser.reset_input_buffer()
 
     def get_water_temp(self):

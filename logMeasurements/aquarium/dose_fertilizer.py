@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from threading import Timer
 from shared import megaApi
-
+from shared.util.util import timestamp_print
 
 class TimeChecker:
     mega: megaApi.MegaApi
@@ -39,12 +39,12 @@ class TimeChecker:
         self.wait_longer()
 
     def wait_longer(self):
-        print("wait longer")
+        timestamp_print("wait longer - dose Fertilizer")
         t = Timer(self.timer_max_delay, self.fertilize_time_controller)
         t.start()
 
     def fertilize(self):
-        print("Fertilize")
+        timestamp_print("Fertilize")
         if self.mega:
             self.mega.relay_timed(0, 3)
         t = Timer(self.timer_max_delay, self.fertilize_time_controller)
