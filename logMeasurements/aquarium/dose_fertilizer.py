@@ -46,6 +46,6 @@ class TimeChecker:
     def fertilize(self):
         timestamp_print("Fertilize")
         if self.mega:
-            self.mega.relay_timed(0, 3)
+            self.mega.relay_timed(0, 5)
         t = Timer(self.timer_max_delay, self.fertilize_time_controller)
         t.start()

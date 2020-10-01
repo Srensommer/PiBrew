@@ -12,7 +12,7 @@ if not debug:
 
 
 class Program:
-    dose_time = time(hour=13, minute=00, second=0)
+    dose_time = time(hour=13, minute=5, second=0)
 
     if not debug:
         mega = MegaApi()
