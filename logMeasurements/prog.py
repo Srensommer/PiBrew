@@ -1,17 +1,24 @@
-from aquarium.dose_fertilizer import TimeChecker
-from shared.util.util import timestamp_print
-from shared.apiCalls import ApiCalls
-from threading import Timer
-from datetime import datetime, timedelta, time
-import time as delay
+try:
+    from aquarium.dose_fertilizer import TimeChecker
+    from shared.util.util import timestamp_print
+    from shared.apiCalls import ApiCalls
+    from threading import Timer
+    from datetime import datetime, timedelta, time
+    import time as delay
+except ModuleNotFoundError as error:
+    print("The required module " + error.name + " was not found!")
+except ImportError as error:
+    print("The required module " + error.name + " ran into an import errorS!")
 
-debug = False
-
+debug = True
 if not debug:
     from shared.megaApi import MegaApi
 
-
 class Program:
+    def __init__(self):
+        timestamp_print("Init")
+        self.measure()
+
     dose_time = time(hour=13, minute=5, second=0)
 
     if not debug:
@@ -21,10 +28,6 @@ class Program:
         time_checker.dosing_version(dose_time, mega)
     else:
         time_checker = TimeChecker(dose_time)
-
-    def __init__(self):
-        timestamp_print("Init")
-        self.measure()
 
     def measure(self):
         data = {"temp": 0, "ph": 0, "TDS": 0}
@@ -47,7 +50,7 @@ class Program:
         t = Timer(secs, self.measure)
         t.start()
 
-
-something = Program()
-while True:
-    delay.sleep(60 * 60 * 24)
+if __name__ == "__main__":
+    something = Program()
+    while True:
+        delay.sleep(60 * 60 * 24)

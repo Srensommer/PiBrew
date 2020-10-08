@@ -19,6 +19,7 @@ class Program:
         timestamp_print("Init")
         self.measure()
 
+    #Skal ud i egen klasse
     def measure(self):
         data = {
             "beer_temp": 0,
@@ -49,6 +50,7 @@ class Program:
                 self.mega.set_pressure_delta(40)
         self.measure_timer()
 
+    #TODO: Skal ud i samme klasse
     def measure_timer(self):
         now = datetime.today()
         next_measure_time = now + timedelta(minutes=10 - (now.minute % 10)) - timedelta(seconds=now.second)
@@ -60,6 +62,7 @@ class Program:
         t.start()
 
 
-something = Program()
-while True:
-    delay.sleep(60 * 60 * 24)
+if __name__ == "__main__":
+    something = Program()
+    while True:
+        delay.sleep(60 * 60 * 24)

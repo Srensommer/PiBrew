@@ -1,3 +1,5 @@
+#TODO brænd ubrugte libs og funktioner af :)
+
 astroid==2.3.3
 certifi==2019.11.28
 chardet==3.0.4

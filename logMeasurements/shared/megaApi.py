@@ -1,12 +1,35 @@
 import serial
 from shared.util.util import timestamp_print
 
-class MegaApi:
+#TODO: to kald til megaen går måske galt pt. håndter flere kald på en gang. "Hvad nu hvis klokken 13 sker på samme tidspunkt som hvert 10. minut?"
 
+class MegaApi:
     def __init__(self):
-        #self.ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=10)
-        self.ser = serial.Serial('/dev/serial0', 115200, timeout=10)
-    
+        for serialcall in ['/dev/ttyUSB0', '/dev/serial0']:
+            try:
+                self.ser = serial.Serial(serialcall, 115200, timeout=10)
+                if self.do_you_answer() == 50:
+                    pass
+                else:
+                    # TODO prøv den næste
+                    pass
+            except:
+                pass
+        try:
+            getattr(self, "ser")
+        except:
+            raise
+            #TODO throw a meaningful error that crashes the program, as it is not meaningful to continue without a ser
+
+    def write_to_mega(self, string):
+        self.clear_serial_read()
+        command = string.encode()
+        self.ser.write(command)
+        return self.ser.readline().decode()
+
+    def do_you_answer(self):
+        self.write_to_mega("test")
+
     def clear_serial_read(self):
         timestamp_print("Flush")
         self.ser.reset_input_buffer()
@@ -110,7 +133,7 @@ class MegaApi:
 
     def get_tds(self):
         self.clear_serial_read()
-        command = 't'
-        self.ser.write(command.encode())
+        command = 't'.encode()
+        self.ser.write(command)
         return self.ser.readline().decode()
 
